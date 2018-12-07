@@ -1,0 +1,618 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>responsive web disign</title>
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/league.css">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides" >
+				<section>
+          <h2>Responsive Web Design.
+              Flexbox. CSS Grid Layout.
+              CSS Recipes & Layouts</h2>
+        </section>
+				<section>
+          <section><h3>What is Responsive Web Design?</h3></section>
+          <section><img src="img/responsive.jpg" alt="responsive"></section>
+          <section>
+            <h2>So How Does it Work?</h2>
+            <h3 class="fragment">CSS Media Queries</h3>
+          </section>
+          <section data-markdown> 
+            <script type="text/template">
+              ## The media query
+              ```
+                body { background: red; }
+
+                @media (max-width: 320px) {
+                  body { background: orange; }
+                }           
+              ```
+              #### Screens 0 to 320px:
+              body’s background will be orange instead of red
+              (overrides the first rule)
+
+              #### Screens Larger than 320px:
+              body’s background will be red
+            </script>
+          </section>
+          <section data-markdown> 
+            <script type="text/template">
+              ## Ways to Use Media Queries
+              #### 1. Within a CSS file or &lt;style&gt; tag
+              ```
+              @media (max-width: 768px) {
+                /* your css goes here */
+              }      
+              ```
+              #### 2. When linking to a CSS file
+              ```
+              <link media="(max-width: 768px)" href="tablet.css" rel="stylesheet">
+              ```
+              #### 3. Within a CSS file via @import
+              ```
+              @import url("tablet.css") (max-width: 768px);
+              ```
+            </script>
+          </section>
+          <section data-markdown>
+            <script type="text/template">
+              # The Viewport
+              tells the device the viewport width = width of the device
+              ```
+              <meta name="viewport" content="width=device-width, initial-scale=1.0">
+              ```
+            </script>
+          </section>
+          <section data-markdown>
+            <script type="text/template">
+              # Responsive Images
+              Responsive images are images that scale nicely to fit any browser size.
+              #### Using the width Property
+              ```
+              <img src="img.jpg" style="width:100%;">
+              ```
+              #### Using the max-width Property
+              ```
+              <img src="img.jpg" style="max-width:100%;height:auto;">
+              ```
+            </script>
+          </section>
+          <section data-markdown>
+            <script type="text/template">
+              ## Picture tag
+              The HTML &lt;picture&gt; element allows you to define different images for different browser window sizes.
+              ```
+              <picture>
+                <source srcset="img_smallflower.jpg" media="(max-width: 600px)">
+                <source srcset="img_flowers.jpg" media="(max-width: 1500px)">
+                <source srcset="flowers.jpg">
+                <img src="img_smallflower.jpg" alt="Flowers">
+              </picture>
+              ```
+            </script>
+          </section>
+          <section>
+            <h2>Learn more</h2>
+            <ul>
+              <li><a href="https://www.w3schools.com/css/css_rwd_mediaqueries.asp">Media Queries</a></li>
+              <li><a href="https://zellwk.com/blog/how-to-write-mobile-first-css/">Mobile first</a></li>
+            </ul>      
+          </section>
+        </section>
+        <section>
+          <section>
+            <h2>Flexbox</h2>
+          </section>
+          <section>
+            <h2>Basic terminology</h2>
+            <img style="background-color: #dddddd"src="img/basic-terminology.svg" alt="">>
+          </section>
+          <section>
+            <h2>Properties for the Parent</h2>
+            <h3>(flex container)</h3>
+            <ul>
+              <li>display</li>
+              <li>flex-direction</li>
+              <li>flex-wrap</li>
+              <li>flex-flow</li>
+              <li>justify-content</li>
+              <li>align-items</li>
+              <li>align-content</li>
+            </ul>
+          </section>
+          <section data-markdown>
+            <script type="text/template">
+              ## Display
+              This defines a flex container
+              ```
+              .container {
+                display: flex; /* or inline-flex */
+              }
+              ```
+            </script>
+          </section>
+          <section data-markdown>
+            <script type="text/template">
+              ### flex-direction
+              <img style="background-color: #dddddd" src="img/flex-direction.svg" alt="">
+              ```
+              .container {
+                flex-direction: row | row-reverse | column | column-reverse;
+              }
+              ```
+            </script>
+          </section>
+          <section data-markdown>
+            <script type="text/template">
+              ### flex-wrap
+              <img style="background-color: #dddddd; height: 50vh" src="img/flex-wrap.svg" alt="">
+              ```
+              .container{
+                flex-wrap: nowrap | wrap | wrap-reverse;
+              }
+              ```
+            </script>
+          </section>
+          <section data-markdown>
+            <script type="text/template">
+              ### flex-flow
+              ```
+              .container{
+                flex-flow: <‘flex-direction’> || <‘flex-wrap’>
+              }
+              ```
+            </script>
+          </section>
+          <section data-markdown>
+            <script type="text/template">
+              ### justify-content
+              <img style="background-color: #dddddd; height: 55vh; width: 100vw" src="img/justify-content.svg" alt="">
+              ```
+              .container {
+                justify-content: flex-start | flex-end | center | space-between | space-around | space-evenly;
+              }
+              ```
+            </script>
+          </section>
+          <section data-markdown>
+            <script type="text/template">
+              ### align-items
+              <img style="background-color: #dddddd; height: 55vh; width: 100vw" src="img/align-items.svg" alt="">
+              ```
+              .container {
+                align-items: flex-start | flex-end | center | baseline | stretch;
+              }
+              ```
+            </script>
+          </section>
+          <section data-markdown>
+            <script type="text/template">
+              ### align-content
+              <img style="background-color: #dddddd; height: 55vh; width: 100vw" src="img/align-content.svg" alt="">
+              ```
+              .container {
+                align-content: flex-start | flex-end | center | space-between | space-around | stretch;
+              }
+              ```
+            </script>
+          </section>
+          <section>
+            <h2>Properties for the Children</h2>
+            <h3>(flex items)</h3>
+            <ul>
+              <li>order</li>
+              <li>flex-grow</li>
+              <li>flex-shrink</li>
+              <li>flex-basis</li>
+              <li>flex</li>
+              <li>align-self</li>
+            </ul>
+          </section>
+          <section data-markdown>
+            <script type="text/template">
+              ### order
+              <img style="background-color: #dddddd; height: 55vh; width: 100vw" src="img/order.svg" alt="">
+              ```
+              .item {
+                order: <integer>; /* default is 0 */
+              }
+              ```
+            </script>
+          </section>
+          <section data-markdown>
+            <script type="text/template">
+              ### flex-grow
+              <img style="background-color: #dddddd; height: 55vh; width: 100vw" src="img/flex-grow.svg" alt="">
+              ```
+              .item {
+                flex-grow: <number>; /* default 0 */
+              }
+              ```
+            </script>
+          </section>
+          <section data-markdown>
+            <script type="text/template">
+              ### flex-shrink
+              ```
+              .item {
+                flex-shrink: <number>; /* default 1 */
+              }
+              ```
+            </script>
+          </section>
+          <section data-markdown>
+            <script type="text/template">
+              ### flex-basic
+              ```
+              .item {
+                flex-basis: <length> | auto; /* default auto */
+              }
+              ```
+            </script>
+          </section>
+          <section data-markdown>
+            <script type="text/template">
+              ### flex
+              ```
+              .item {
+                flex: none | [ <'flex-grow'> <'flex-shrink'>? || <'flex-basis'> ]
+              }
+              ```
+            </script>
+          </section>
+          <section data-markdown>
+            <script type="text/template">
+              ### align-self
+              <img style="background-color: #dddddd; height: 55vh; width: 100vw" src="img/align-self.svg" alt="">
+              ```
+              .item {
+                align-self: auto | flex-start | flex-end | center | baseline | stretch;
+              }
+              ```
+            </script>
+          </section>
+          <section>
+            <h2>Learn more</h2>
+            <ul>
+              <li><a href="https://spaceninja.com/2015/08/24/what-is-flexbox/">What is flexbox</a></li>
+              <li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Flexible_Box_Layout/Basic_Concepts_of_Flexbox">Basic concepts of flexbox</a></li>
+            </ul>   
+          </section>
+        </section>
+        <section>
+          <section>
+              <h2>Grid layout</h2>
+          </section>
+          <section>
+            <img src="img/grid.png" alt="">
+          </section>
+          <section>
+            <h2>Properties for the Parent:</h2>
+            <h3>(Grid Container)</h3>
+          </section>
+          <section data-markdown>
+            <script type="text/template">
+              ### Display
+              ```
+              .container {
+                display: grid
+              }
+              ```
+            </script>
+          </section>
+          <section data-markdown>
+            <script type="text/template">
+              ### grid-template-columns & grid-template-rows
+                ```
+              .container {
+                grid-template-columns: <track-size> ... | <line-name> <track-size> ...;
+                grid-template-rows: <track-size> ... | <line-name> <track-size> ...;
+              }
+              ```
+            </script>
+          </section>
+          <section data-markdown>
+            <script type="text/template">
+              <img style="background-color: #dddddd; height: 55vh; width: 100vw" src="img/template-columns-rows-01.svg" alt="">
+              ```
+              .container {
+                grid-template-columns: [first] 40px [line2] 50px [line3] auto [col4-start] 50px [five] 40px [end];
+                grid-template-rows: [row1-start] 25% [row1-end] 100px [third-line] auto [last-line];
+              }
+              ```
+            </script>
+          </section>
+          <section data-markdown>
+            <script type="text/template">
+              ```
+              .container {
+                grid-template-columns: repeat(3, 20px [col-start]);
+              }
+              ```
+              ```
+              .item {
+                grid-column-start: col-start 2;
+              }
+              ```
+            </script>
+          </section>
+          <section data-markdown>
+            <script type="text/template">
+              ### grid-template-areas
+              <p align="left">Values:</p>
+              <ul>
+                <li><b>grid-area-name</b> - the name of a grid area specified with grid-area</li>
+                <li><b>.</b> - a period signifies an empty grid cell</li>
+                <li><b>none</b> - no grid areas are defined</li>
+              </ul>
+              ```
+              .container {
+                grid-template-areas: 
+                  "<grid-area-name> | . | none | ..."
+                  "...";
+              }
+              ```
+            </script>
+          </section>
+          <section>
+            <h3>Example</h3>
+            <img style="height: 70vh"src="img/dddgrid-template-areas.svg" alt="">
+          </section>
+          <section data-markdown>
+            <script type="text/template">
+              ```
+              .item-a {
+                grid-area: header;
+              }
+              .item-b {
+                grid-area: main;
+              }
+              .item-c {
+                grid-area: sidebar;
+              }
+              .item-d {
+                grid-area: footer;
+              }
+              
+              .container {
+                grid-template-columns: 50px 50px 50px 50px;
+                grid-template-rows: auto;
+                grid-template-areas: 
+                  "header header header header"
+                  "main main . sidebar"
+                  "footer footer footer footer";
+              }
+              ```
+            </script>
+          </section>
+          <section data-markdown>
+            <script type="text/template">
+              ### grid-template
+              ```
+              .container {
+                grid-template:
+                  [row1-start] "header header header" 25px [row1-end]
+                  [row2-start] "footer footer footer" 25px [row2-end]
+                  / auto 50px auto;
+              }
+              ```
+             </script>
+          </section>
+          <section data-markdown>
+            <script type="text/template">
+              ### Grid-column-gap & grid-row-gap
+              <img style="background-color: #dddddd; height: 55vh; width: 100vw" src="img/dddgrid-gap1.svg" alt="">
+              ```
+              .container {
+                grid-template-columns: 100px 50px 100px;
+                grid-template-rows: 80px auto 80px; 
+                grid-column-gap: 10px;
+                grid-row-gap: 15px;
+              }
+              ```
+            </script>
+          </section>
+          <section data-markdown>
+            <script type="text/template">
+              ### grid-gap
+              ```
+              .container {
+                grid-gap: <grid-row-gap> <grid-column-gap>;
+              }
+              ```
+            </script>
+          </section>
+          <section data-markdown>
+            <script type="text/template">
+              ### justify-items & align-items
+              ```
+              .container {
+                justify-items: start | end | center | stretch;
+                align-items: start | end | center | stretch;
+              }
+              ```
+            </script>
+          </section>
+          <section data-markdown>
+            <script type="text/template">
+              <img style="background-color: #dddddd; height: 27vh; width: 100vw" src="img/justify-items-start.svg" alt="">
+              ```
+              .container {
+                justify-items: start
+              }
+              ```
+
+              <img style="background-color: #dddddd; height: 27vh; width: 100vw" src="img/align-items-start.svg" alt="">
+              ```
+              .container {
+                align-items: start;
+              }
+              ```
+            </script>
+          </section>
+          <section data-markdown>
+            <script type="text/template">
+              ### justify-content & align-content
+              ```
+              .container {
+                justify-content: start | end | center | stretch | space-around | space-between | space-evenly;	
+                align-content: start | end | center | stretch | space-around | space-between | space-evenly;	
+              }
+              ```
+            </script>
+          </section>  
+          <section data-markdown>
+            <script type="text/template">
+              ### grid-auto-columns & grid-auto-rows
+              <img style="background-color: #dddddd; height: 55vh; width: 100vw" src="img/grid-auto-columns-rows-03.svg" alt="">
+              ```
+              .container {
+                grid-auto-columns: 60px;
+              }
+              ```
+            </script>
+          </section>  
+          <section data-markdown>
+            <script type="text/template">
+              ### grid
+              ```
+              .container {
+                grid: 100px 300px / 3fr 1fr;
+              }
+              ```
+              =
+              ```
+              .container {
+                grid-template-rows: 100px 300px;
+                grid-template-columns: 3fr 1fr;
+              }
+              ```
+            </script>
+          </section>
+          <section>
+            <h2>Properties for the Children:</h2>
+          </section>
+          <section data-markdown>
+            <script type="text/template">
+              ### grid-column & grid-row
+              <img style="background-color: #dddddd; height: 55vh; width: 100vw" src="img/grid-column-row.svg" alt="">
+              ```
+              .item-c {
+                grid-column: 3 / span 2;
+                grid-row: third-line / 4;
+              }
+              ```
+            </script>
+          </section>  
+          <section data-markdown>
+            <script type="text/template">
+              ### grid-area
+              ```
+              .item {
+                grid-area: <name> | <row-start> / <column-start> / <row-end> / <column-end>;
+              }
+              ```
+            </script>
+          </section>  
+          <section data-markdown>
+            <script type="text/template">
+              ### grid-area
+              <img style="background-color: #dddddd; height: 55vh; width: 100vw" src="img/justify-self-start.svg" alt="">
+              ```
+              .item-a {
+                justify-self: start;
+              }
+              ```
+            </script>
+          </section>  
+          <section>
+            <h2>Learn more</h2>
+            <ul>
+              <li><a href="https://css-tricks.com/snippets/css/complete-guide-grid/">A Complete Guide to Grid</a></li>
+              <li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Grid_Layout/Basic_Concepts_of_Grid_Layout">Basic concepts of grid layout</a></li>
+            </ul>   
+          </section>
+        </section>
+        <section>
+          <section>
+            <h2>css recipes & layouts</h2>
+          </section>
+          <section>
+            <h4><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Layout_cookbook/Media_objects">Media objects</a></h4>
+            <img src="img/media-object.png" alt="">  
+          </section>
+          <section>
+            <h4><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Layout_cookbook/Column_layouts">Column</a></h4>
+            <img src="img/cookbook-multiple-columns.png" alt="">
+          </section>
+          <section>
+            <h4><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Layout_cookbook/Center_an_element">Center an element</a></h4>
+            <img src="img/cookbook-center.png" alt="">
+          </section>
+          <section>
+            <h4><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Layout_cookbook/Sticky_footers">Sticky footers</a></h4>
+            <img src="img/cookbook-footer.png" alt="">
+          </section>
+          <section>
+            <h4><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Layout_cookbook/Split_Navigation">Split navigation</a></h4>
+            <img src="img/split-navigation.png" alt="">
+          </section>
+          <section>
+            <h4><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Layout_cookbook/Breadcrumb_Navigation">Breadcrumb navigation</a></h4>
+            <img src="img/breadcrumb-navigation.png" alt="">
+          </section>
+          <section>
+            <h4><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Layout_cookbook/List_group_with_badges">List group with badges</a></h4>
+            <img src="img/list-group-badges.png" alt="">
+          </section>
+          <section>
+            <h4><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Layout_cookbook/Pagination">Pagination</a></h4>
+            <img src="img/pagination.png" alt="">
+          </section>
+          <section>
+            <h4><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Layout_cookbook/Card">Card</a></h4>
+            <img src="img/cards.png" alt="">
+          </section>
+        </section>
+        <section>
+          <h2>The end :)</h2>
+        </section>
+			</div>
+    </div>
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+			// More info about config & dependencies:
+			// - https://github.com/hakimel/reveal.js#configuration
+			// - https://github.com/hakimel/reveal.js#dependencies
+			Reveal.initialize({
+				dependencies: [
+					{ src: 'plugin/markdown/marked.js' },
+					{ src: 'plugin/markdown/markdown.js' },
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+				]
+			});
+		</script>
+	</body>
+</html>
